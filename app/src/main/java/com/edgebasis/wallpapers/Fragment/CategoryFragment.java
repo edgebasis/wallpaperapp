@@ -1,6 +1,7 @@
 package com.edgebasis.wallpapers.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,7 +17,9 @@ import android.widget.GridLayout;
 
 import com.edgebasis.wallpapers.Common.Common;
 import com.edgebasis.wallpapers.Interface.ItemClickListener;
+import com.edgebasis.wallpapers.ListWallpapers;
 import com.edgebasis.wallpapers.Model.Category;
+import com.edgebasis.wallpapers.Model.Wallpaper;
 import com.edgebasis.wallpapers.R;
 import com.edgebasis.wallpapers.ViewHolder.CategoryViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -85,7 +88,10 @@ public class CategoryFragment extends Fragment {
                 holder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onCLick(View view, int position) {
-
+                        Common.CATEGORY_ID_SELECTED = fbrAdpCategories.getRef(position).getKey();
+                        Common.CATEGORY_SELECTED = model.getName();
+                        Intent intent = new Intent(getActivity(), ListWallpapers.class);
+                        startActivity(intent);
                     }
                 });
 
